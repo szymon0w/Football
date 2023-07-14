@@ -23,11 +23,11 @@ clock = pygame.time.Clock()
 while True:
     
     # --- Main event loop
-    move_x, move_y = event_handler.handle_events()
+    player_moves = event_handler.handle_events()
 
     # --- Game logic should go here
-    player, ball, points = game_engine.game_loop(move_x, move_y)
+    players, ball, points = game_engine.game_loop(player_moves)
 
     # --- Drawing code should go here
-    image_handler_parameters = image_handler.update(player, ball, points)
+    image_handler_parameters = image_handler.update(players, ball, points)
     clock.tick(60)
