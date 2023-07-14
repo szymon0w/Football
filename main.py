@@ -13,7 +13,7 @@ image_handler = ImageHandler()
 
 # Set the width and height of the screen [width, height]
  
-pygame.display.set_caption("Golf")
+pygame.display.set_caption("Football")
  
 # Loop until the user clicks the close button. 
 # Used to manage how fast the screen updates
@@ -26,8 +26,8 @@ while True:
     move_x, move_y = event_handler.handle_events()
 
     # --- Game logic should go here
-    player, ball = game_engine.game_loop(move_x, move_y)
+    player, ball, points = game_engine.game_loop(move_x, move_y)
 
     # --- Drawing code should go here
-    image_handler_parameters = image_handler.update(player, ball)
+    image_handler_parameters = image_handler.update(player, ball, points)
     clock.tick(60)
