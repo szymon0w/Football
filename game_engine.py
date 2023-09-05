@@ -72,16 +72,21 @@ class Ball:
         return goal
 
 class GameEngine:
-    def __init__(self):
+    def __init__(self, instantBounce):
         self.ball = Ball()
         self.players = [Player(config.GREEN), Player(config.RED, config.WIDTH - config.PLAYER_START_X)]
         self.points = [0, 0]
+        self.instantBounce = instantBounce
 
     def handle_collision(self, player):
         distance_squared = (player.x-self.ball.x)**2 + (player.y-self.ball.y)**2
         if distance_squared <= (player.radius + self.ball.radius)**2: 
-            self.ball.speed_x += (self.ball.x - player.x) / pow(distance_squared, 0.5)
-            self.ball.speed_y += (self.ball.y - player.y) / pow(distance_squared, 0.5)  
+            if not self.instantBounce:
+                self.ball.speed_x += (self.ball.x - player.x) / pow(distance_squared, 0.5)
+                self.ball.speed_y += (self.ball.y - player.y) / pow(distance_squared, 0.5) 
+            else:
+                self.ball.speed_x = ((self.ball.x - player.x) / pow(distance_squared, 0.5))*10
+                self.ball.speed_y = ((self.ball.y - player.y) / pow(distance_squared, 0.5))*10  
 
     #updating the state of the game
     def game_loop(self, player_moves):

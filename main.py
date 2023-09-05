@@ -3,15 +3,20 @@ from image_handler import ImageHandler
 from event_handler import EventHandler
 from game_engine import GameEngine
 from controller.controller import Controller
-import config
 
 print("Before playing choose game type:\n \'1\' - 1 vs 1 (WSAD and arrows)\n \'2\' - 1 vs 1 (controller and arrows)")
 control_type = input()
+print("decide how kicks will work:\n \'1\' - bouncily \n \'2\' - instant kick")
+bounce_type = input()
+if bounce_type == "1":
+    instantBounce = False
+else:
+    instantBounce = True
 # Define some colors
 clock = pygame.time.Clock()
 pygame.init()
 event_handler = EventHandler()
-game_engine = GameEngine()
+game_engine = GameEngine(instantBounce)
 image_handler = ImageHandler()
 pygame.display.set_caption("Football")
  
